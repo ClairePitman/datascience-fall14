@@ -1,26 +1,66 @@
 SQL Assignment Submission
 
 === 1
-<INSERT YOUR QUERY HERE>
+create View number_of_medals as Select countries.name, count(results.medal) from countries inner join players on countries.country_id=players.country_id inner join results on players.player_id=results.player_id group by countries.name;
 **************** RESULT ***************************************************************
-<INSERT YOUR RESULT HERE>
+CREATE VIEW
+
 =============================================================================================
 
-=== 2
-<INSERT YOUR QUERY HERE>
+=== 2a
+select * from R inner join S on (R.c=S.c or (R.c IS NULL AND S.c IS NULL));
+
 **************** RESULT ***************************************************************
-<INSERT YOUR RESULT HERE>
+     a      | b  | c  | c  |     d      
+------------+----+----+----+------------
+ a3         | 30 | 30 | 30 | d1        
+ a4         |  0 |    |    | d2        
+(2 rows)
+
+=== 2b
+select R.a, R.b, R.c, S.d from R full outer join S on R.c=S.c union select R.a, R.b, R.c, S.d  from S left outer join R on R.c=S.c;
+**************** RESULT ***************************************************************
+     a      | b  | c  |     d      
+------------+----+----+------------
+ a1         | 15 | 15 | 
+ a2         | 20 | 20 | 
+ a3         | 30 | 30 | d1        
+ a4         |  0 |    | 
+            |    |    | d2        
+(5 rows)
+
 =============================================================================================
 
 === 3
-<INSERT YOUR QUERY HERE>
+CREATE OR REPLACE FUNCTION updateTeam()
+RETURNS trigger AS $$
+BEGIN 
+	Drop Table TeamMedals ;
+	create table TeamMedals(country_id char(3), event_id char(7), medal char(7), result float);
+Insert into TeamMedals (country_id, event_id, medal, result) select distinct players.country_id, results.event_id , results.medal,results.result from results inner join players on results.player_id= players.player_id inner join events on events.event_id=results.event_id where is_team_event=1;
+RETURN NEW;
+END;
+$$
+LANGUAGE 'plpgsql';
+CREATE TRIGGER group_medals  AFTER  INSERT
+    ON results
+    FOR  EACH  STATEMENT 
+    EXECUTE PROCEDURE updateTeam()
+;
+
+
 **************** RESULT ***************************************************************
-<INSERT YOUR RESULT HERE>
+
+CREATE TRIGGER
+
 =============================================================================================
 
 === 4
 <INSERT YOUR QUERY HERE>
 **************** RESULT ***************************************************************
-<INSERT YOUR RESULT HERE>
+ <medal><event>E35    </event> <player>Aaron Peirsol</player></medal><medal><event>E95    </event> <player>Carly Piper</player><player>Dana Vollmer</player><player>Kaitlin Sandeno</player><player>Lindsay Benko</player><player>Natalie Coughlin</player></medal><medal><event>E77    </event> <player>Jeremy Wariner</player></medal><medal><event>E107   </event> <player>Gary Hall Jr.</player></medal><medal><event>E13    </event> <player>Michael Phelps</player></medal><medal><event>E21    </event> <player>Joanna Hayes</player></medal><medal><event>E145   </event> <player>Timothy Mack</player></medal><medal><event>E137   </event> <player>Dwight Phillips</player></medal><medal><event>E51    </event> <player>Michael Phelps</player></medal><medal><event>E93    </event> <player>Klete Keller</player><player>Michael Phelps</player><player>Peter Vanderkaay</player><player>Ryan Lochte</player><player>Scott Goldblatt</player></medal><medal><event>E85    </event> <player>Aaron Peirsol</player><player>Brendan Hansen</player><player>Ian Crocker</player><player>Jason Lezak</player><player>Lenny Krayzelburg</player><player>Michael Phelps</player><player>Neil Walker</player></medal><medal><event>E23    </event> <player>Justin Gatlin</player></medal><medal><event>E73    </event> <player>Michael Phelps</player></medal><medal><event>E7     </event> <player>Natalie Coughlin</player></medal><medal><event>E5     </event> <player>Aaron Peirsol</player></medal><medal><event>E55    </event> <player>Shawn Crawford</player></medal><medal><event>E43    </event> <player>Michael Phelps</player></medal><medal><event>E41    </event> <player>Amanda Beard</player></medal><medal><event>E97    </event> <player>Darold Williamson</player><player>Derrick Brew</player><player>Jeremy Wariner</player><player>Otis Harris Jr</player></medal><medal><event>E99    </event> <player>Deedee Trotter</player><player>Monique Henderson</player><player>Monique Hennagan</player><player>Sanya Richards</player></medal>
+(1 row)
+
+
 =============================================================================================
 

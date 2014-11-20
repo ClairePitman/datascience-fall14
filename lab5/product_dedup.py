@@ -96,7 +96,8 @@ else:
     # to be used and specify any customComparators. Please read the dedupe manual for details
     fields = [
         {'field' : 'title', 'type': 'String'},
-        {'field' : 'price', 'type': 'Custom', 'has missing':True, 'comparator' : customComparator}
+        {'field' : 'price', 'type': 'Custom', 'has missing':True, 'comparator' : customComparator},
+	{'field' : 'manufacturer', 'type': 'String'}
         ]
 
     # Create a new deduper object and pass our data model to it.
