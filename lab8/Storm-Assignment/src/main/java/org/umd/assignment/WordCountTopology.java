@@ -114,7 +114,7 @@ public class WordCountTopology {
 
     TopologyBuilder builder = new TopologyBuilder();
 
-	// ---------------------------- Task 1 -------------------------------------
+	// ---------------------------- Task 1 done-------------------------------------
 	//
 	//		You need to use TwitterSampleSpout() for the assignemt. But, it won't work
 	//		unless you set up the access token correctly in the TwitterSampleSpout.java
@@ -124,7 +124,7 @@ public class WordCountTopology {
 	//--------------------------------------------------------------------------
 
 	// Setting up a spout
-    builder.setSpout("spout", new RandomSentenceSpout(), 3); //builder.setSpout("spout", new TwitterSampleSpout(), 3);
+    builder.setSpout("spout", new TwitterSampleSpout(), 3); //builder.setSpout("spout", new TwitterSampleSpout(), 3);
 
 	// Setting up bolts
     builder.setBolt("split", new SplitSentence(), 3).shuffleGrouping("spout");
