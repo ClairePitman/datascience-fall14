@@ -83,10 +83,10 @@ public class TwitterSampleSpout extends BaseRichSpout {
 	//------------------------------------------------------------------------
 
 	public TwitterSampleSpout() {		
-		this.consumerKey = "aqMhHjo25IFTlQqmT3A1YNnPVs";
-		this.consumerSecret = "bdGjNYhusZSbzLQ6695veAJG9KtkBtAHYZwwLEnfGujqGz5j987";
-		this.accessToken = "c11412092-ks3eYiWAL8SKcTAJ3SMDdAkBJss7gOHMTk2YlwPFZ";
-		this.accessTokenSecret = "diDFa3JCYbgBv3D5MZei2xdHkGdZcDEqLGJcbNx7P5fKmv";
+		this.consumerKey = "AGPTAuewGDUi8WVH0vweP9Zq4";
+		this.consumerSecret = "aUaruexnoL3pqDEH7hvHpmrRCWTYoP3XXYfsM5UeNkqiB8pR2K";
+		this.accessToken = "913891236-CwdSohO15CQjiQIkf5LSxduhGOptiXl1lrpG1267";
+		this.accessTokenSecret = "n0eC0kNNOxWMOSOKVU6sSQyo1q49y1GUfY0pXs3fE07eO";
 		this.keyWords = new String[1];
 		this.keyWords[0] = "obama"; /* Filters All Tweets with word Obama */
 	}
